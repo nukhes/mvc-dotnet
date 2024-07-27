@@ -1,4 +1,4 @@
-﻿namespace LivrariaBoaLeitura
+﻿namespace MVC
 {
     partial class Form1
     {
@@ -29,34 +29,38 @@
         private void InitializeComponent()
         {
             this.boxAutor = new System.Windows.Forms.GroupBox();
-            this.lblAutorId = new System.Windows.Forms.Label();
-            this.lblNome = new System.Windows.Forms.Label();
-            this.lblNacionalidade = new System.Windows.Forms.Label();
-            this.txtId = new System.Windows.Forms.TextBox();
-            this.txtNome = new System.Windows.Forms.TextBox();
             this.txtNacionalidade = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtNome = new System.Windows.Forms.TextBox();
+            this.txtAutorId = new System.Windows.Forms.TextBox();
+            this.lblNacionalidade = new System.Windows.Forms.Label();
+            this.lblNome = new System.Windows.Forms.Label();
+            this.lblAutorId = new System.Windows.Forms.Label();
+            this.boxLivro = new System.Windows.Forms.GroupBox();
+            this.txtAutorLivroId = new System.Windows.Forms.TextBox();
+            this.lblAutorId2 = new System.Windows.Forms.Label();
             this.txtDataPub = new System.Windows.Forms.TextBox();
             this.txtTitulo = new System.Windows.Forms.TextBox();
             this.txtLivroId = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtIdAutor2 = new System.Windows.Forms.TextBox();
-            this.lblAutorId2 = new System.Windows.Forms.Label();
             this.btnNovoAutor = new System.Windows.Forms.Button();
             this.btnGravarAutor = new System.Windows.Forms.Button();
             this.btnGravarLivro = new System.Windows.Forms.Button();
             this.btnNovoLivro = new System.Windows.Forms.Button();
+            this.btnBuscarAutor = new System.Windows.Forms.Button();
+            this.btnEditarAutor = new System.Windows.Forms.Button();
+            this.btnBuscaAutor = new System.Windows.Forms.Button();
             this.boxAutor.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.boxLivro.SuspendLayout();
             this.SuspendLayout();
             // 
             // boxAutor
             // 
+            this.boxAutor.Controls.Add(this.btnBuscaAutor);
             this.boxAutor.Controls.Add(this.txtNacionalidade);
             this.boxAutor.Controls.Add(this.txtNome);
-            this.boxAutor.Controls.Add(this.txtId);
+            this.boxAutor.Controls.Add(this.txtAutorId);
             this.boxAutor.Controls.Add(this.lblNacionalidade);
             this.boxAutor.Controls.Add(this.lblNome);
             this.boxAutor.Controls.Add(this.lblAutorId);
@@ -67,23 +71,26 @@
             this.boxAutor.TabStop = false;
             this.boxAutor.Text = "Autor";
             // 
-            // lblAutorId
+            // txtNacionalidade
             // 
-            this.lblAutorId.AutoSize = true;
-            this.lblAutorId.Location = new System.Drawing.Point(46, 29);
-            this.lblAutorId.Name = "lblAutorId";
-            this.lblAutorId.Size = new System.Drawing.Size(18, 13);
-            this.lblAutorId.TabIndex = 1;
-            this.lblAutorId.Text = "ID";
+            this.txtNacionalidade.Location = new System.Drawing.Point(49, 147);
+            this.txtNacionalidade.Name = "txtNacionalidade";
+            this.txtNacionalidade.Size = new System.Drawing.Size(201, 20);
+            this.txtNacionalidade.TabIndex = 6;
             // 
-            // lblNome
+            // txtNome
             // 
-            this.lblNome.AutoSize = true;
-            this.lblNome.Location = new System.Drawing.Point(46, 79);
-            this.lblNome.Name = "lblNome";
-            this.lblNome.Size = new System.Drawing.Size(35, 13);
-            this.lblNome.TabIndex = 2;
-            this.lblNome.Text = "Nome";
+            this.txtNome.Location = new System.Drawing.Point(49, 95);
+            this.txtNome.Name = "txtNome";
+            this.txtNome.Size = new System.Drawing.Size(201, 20);
+            this.txtNome.TabIndex = 5;
+            // 
+            // txtAutorId
+            // 
+            this.txtAutorId.Location = new System.Drawing.Point(49, 45);
+            this.txtAutorId.Name = "txtAutorId";
+            this.txtAutorId.Size = new System.Drawing.Size(163, 20);
+            this.txtAutorId.TabIndex = 4;
             // 
             // lblNacionalidade
             // 
@@ -94,43 +101,56 @@
             this.lblNacionalidade.TabIndex = 3;
             this.lblNacionalidade.Text = "Nacionalidade";
             // 
-            // txtId
+            // lblNome
             // 
-            this.txtId.Location = new System.Drawing.Point(49, 45);
-            this.txtId.Name = "txtId";
-            this.txtId.Size = new System.Drawing.Size(201, 20);
-            this.txtId.TabIndex = 4;
+            this.lblNome.AutoSize = true;
+            this.lblNome.Location = new System.Drawing.Point(46, 79);
+            this.lblNome.Name = "lblNome";
+            this.lblNome.Size = new System.Drawing.Size(35, 13);
+            this.lblNome.TabIndex = 2;
+            this.lblNome.Text = "Nome";
             // 
-            // txtNome
+            // lblAutorId
             // 
-            this.txtNome.Location = new System.Drawing.Point(49, 95);
-            this.txtNome.Name = "txtNome";
-            this.txtNome.Size = new System.Drawing.Size(201, 20);
-            this.txtNome.TabIndex = 5;
+            this.lblAutorId.AutoSize = true;
+            this.lblAutorId.Location = new System.Drawing.Point(46, 29);
+            this.lblAutorId.Name = "lblAutorId";
+            this.lblAutorId.Size = new System.Drawing.Size(18, 13);
+            this.lblAutorId.TabIndex = 1;
+            this.lblAutorId.Text = "ID";
             // 
-            // txtNacionalidade
+            // boxLivro
             // 
-            this.txtNacionalidade.Location = new System.Drawing.Point(49, 147);
-            this.txtNacionalidade.Name = "txtNacionalidade";
-            this.txtNacionalidade.Size = new System.Drawing.Size(201, 20);
-            this.txtNacionalidade.TabIndex = 6;
+            this.boxLivro.Controls.Add(this.txtAutorLivroId);
+            this.boxLivro.Controls.Add(this.lblAutorId2);
+            this.boxLivro.Controls.Add(this.txtDataPub);
+            this.boxLivro.Controls.Add(this.txtTitulo);
+            this.boxLivro.Controls.Add(this.txtLivroId);
+            this.boxLivro.Controls.Add(this.label1);
+            this.boxLivro.Controls.Add(this.label2);
+            this.boxLivro.Controls.Add(this.label3);
+            this.boxLivro.Location = new System.Drawing.Point(12, 206);
+            this.boxLivro.Name = "boxLivro";
+            this.boxLivro.Size = new System.Drawing.Size(303, 246);
+            this.boxLivro.TabIndex = 7;
+            this.boxLivro.TabStop = false;
+            this.boxLivro.Text = "Livro";
             // 
-            // groupBox1
+            // txtAutorLivroId
             // 
-            this.groupBox1.Controls.Add(this.txtIdAutor2);
-            this.groupBox1.Controls.Add(this.lblAutorId2);
-            this.groupBox1.Controls.Add(this.txtDataPub);
-            this.groupBox1.Controls.Add(this.txtTitulo);
-            this.groupBox1.Controls.Add(this.txtLivroId);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Location = new System.Drawing.Point(12, 206);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(303, 246);
-            this.groupBox1.TabIndex = 7;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Autor";
+            this.txtAutorLivroId.Location = new System.Drawing.Point(49, 196);
+            this.txtAutorLivroId.Name = "txtAutorLivroId";
+            this.txtAutorLivroId.Size = new System.Drawing.Size(201, 20);
+            this.txtAutorLivroId.TabIndex = 8;
+            // 
+            // lblAutorId2
+            // 
+            this.lblAutorId2.AutoSize = true;
+            this.lblAutorId2.Location = new System.Drawing.Point(46, 180);
+            this.lblAutorId2.Name = "lblAutorId2";
+            this.lblAutorId2.Size = new System.Drawing.Size(61, 13);
+            this.lblAutorId2.TabIndex = 7;
+            this.lblAutorId2.Text = "ID do Autor";
             // 
             // txtDataPub
             // 
@@ -160,7 +180,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(101, 13);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Data de Públicação";
+            this.label1.Text = "Data de Publicação";
             // 
             // label2
             // 
@@ -180,22 +200,6 @@
             this.label3.TabIndex = 1;
             this.label3.Text = "ID";
             // 
-            // txtIdAutor2
-            // 
-            this.txtIdAutor2.Location = new System.Drawing.Point(49, 196);
-            this.txtIdAutor2.Name = "txtIdAutor2";
-            this.txtIdAutor2.Size = new System.Drawing.Size(201, 20);
-            this.txtIdAutor2.TabIndex = 8;
-            // 
-            // lblAutorId2
-            // 
-            this.lblAutorId2.AutoSize = true;
-            this.lblAutorId2.Location = new System.Drawing.Point(46, 180);
-            this.lblAutorId2.Name = "lblAutorId2";
-            this.lblAutorId2.Size = new System.Drawing.Size(61, 13);
-            this.lblAutorId2.TabIndex = 7;
-            this.lblAutorId2.Text = "ID do Autor";
-            // 
             // btnNovoAutor
             // 
             this.btnNovoAutor.Location = new System.Drawing.Point(321, 12);
@@ -204,24 +208,27 @@
             this.btnNovoAutor.TabIndex = 8;
             this.btnNovoAutor.Text = "Novo Autor";
             this.btnNovoAutor.UseVisualStyleBackColor = true;
+            this.btnNovoAutor.Click += new System.EventHandler(this.btnNovoAutor_Click);
             // 
             // btnGravarAutor
             // 
-            this.btnGravarAutor.Location = new System.Drawing.Point(321, 45);
+            this.btnGravarAutor.Location = new System.Drawing.Point(321, 50);
             this.btnGravarAutor.Name = "btnGravarAutor";
             this.btnGravarAutor.Size = new System.Drawing.Size(111, 32);
             this.btnGravarAutor.TabIndex = 9;
             this.btnGravarAutor.Text = "Gravar Autor";
             this.btnGravarAutor.UseVisualStyleBackColor = true;
+            this.btnGravarAutor.Click += new System.EventHandler(this.btnGravarAutor_Click);
             // 
             // btnGravarLivro
             // 
-            this.btnGravarLivro.Location = new System.Drawing.Point(321, 239);
+            this.btnGravarLivro.Location = new System.Drawing.Point(321, 244);
             this.btnGravarLivro.Name = "btnGravarLivro";
             this.btnGravarLivro.Size = new System.Drawing.Size(111, 32);
             this.btnGravarLivro.TabIndex = 11;
             this.btnGravarLivro.Text = "Gravar Livro";
             this.btnGravarLivro.UseVisualStyleBackColor = true;
+            this.btnGravarLivro.Click += new System.EventHandler(this.btnGravarLivro_Click);
             // 
             // btnNovoLivro
             // 
@@ -231,24 +238,60 @@
             this.btnNovoLivro.TabIndex = 10;
             this.btnNovoLivro.Text = "Novo Livro";
             this.btnNovoLivro.UseVisualStyleBackColor = true;
+            this.btnNovoLivro.Click += new System.EventHandler(this.btnNovoLivro_Click);
+            // 
+            // btnBuscarAutor
+            // 
+            this.btnBuscarAutor.Location = new System.Drawing.Point(321, 88);
+            this.btnBuscarAutor.Name = "btnBuscarAutor";
+            this.btnBuscarAutor.Size = new System.Drawing.Size(111, 32);
+            this.btnBuscarAutor.TabIndex = 12;
+            this.btnBuscarAutor.Text = "Buscar Autor";
+            this.btnBuscarAutor.UseVisualStyleBackColor = true;
+            this.btnBuscarAutor.Click += new System.EventHandler(this.btnBuscarAutor_Click);
+            // 
+            // btnEditarAutor
+            // 
+            this.btnEditarAutor.Location = new System.Drawing.Point(321, 126);
+            this.btnEditarAutor.Name = "btnEditarAutor";
+            this.btnEditarAutor.Size = new System.Drawing.Size(111, 32);
+            this.btnEditarAutor.TabIndex = 13;
+            this.btnEditarAutor.Text = "Editar Autor";
+            this.btnEditarAutor.UseVisualStyleBackColor = true;
+            this.btnEditarAutor.Click += new System.EventHandler(this.btnEditarAutor_Click);
+            // 
+            // btnBuscaAutor
+            // 
+            this.btnBuscaAutor.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.btnBuscaAutor.Location = new System.Drawing.Point(218, 40);
+            this.btnBuscaAutor.Name = "btnBuscaAutor";
+            this.btnBuscaAutor.Size = new System.Drawing.Size(32, 32);
+            this.btnBuscaAutor.TabIndex = 7;
+            this.btnBuscaAutor.Text = "🔎";
+            this.btnBuscaAutor.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 463);
+            this.ClientSize = new System.Drawing.Size(444, 463);
+            this.Controls.Add(this.btnEditarAutor);
+            this.Controls.Add(this.btnBuscarAutor);
             this.Controls.Add(this.btnGravarLivro);
             this.Controls.Add(this.btnNovoLivro);
             this.Controls.Add(this.btnGravarAutor);
             this.Controls.Add(this.btnNovoAutor);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.boxLivro);
             this.Controls.Add(this.boxAutor);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "]";
+            this.ShowIcon = false;
+            this.Text = "Projeto MVC";
             this.boxAutor.ResumeLayout(false);
             this.boxAutor.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.boxLivro.ResumeLayout(false);
+            this.boxLivro.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -259,22 +302,25 @@
         private System.Windows.Forms.Label lblAutorId;
         private System.Windows.Forms.TextBox txtNacionalidade;
         private System.Windows.Forms.TextBox txtNome;
-        private System.Windows.Forms.TextBox txtId;
+        private System.Windows.Forms.TextBox txtAutorId;
         private System.Windows.Forms.Label lblNacionalidade;
         private System.Windows.Forms.Label lblNome;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox boxLivro;
         private System.Windows.Forms.TextBox txtDataPub;
         private System.Windows.Forms.TextBox txtTitulo;
         private System.Windows.Forms.TextBox txtLivroId;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtIdAutor2;
+        private System.Windows.Forms.TextBox txtAutorLivroId;
         private System.Windows.Forms.Label lblAutorId2;
         private System.Windows.Forms.Button btnNovoAutor;
         private System.Windows.Forms.Button btnGravarAutor;
         private System.Windows.Forms.Button btnGravarLivro;
         private System.Windows.Forms.Button btnNovoLivro;
+        private System.Windows.Forms.Button btnBuscarAutor;
+        private System.Windows.Forms.Button btnEditarAutor;
+        private System.Windows.Forms.Button btnBuscaAutor;
     }
 }
 
