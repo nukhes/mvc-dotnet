@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.boxAutor = new System.Windows.Forms.GroupBox();
+            this.btnBuscaAutor = new System.Windows.Forms.Button();
             this.txtNacionalidade = new System.Windows.Forms.TextBox();
             this.txtNome = new System.Windows.Forms.TextBox();
             this.txtAutorId = new System.Windows.Forms.TextBox();
@@ -50,7 +51,6 @@
             this.btnNovoLivro = new System.Windows.Forms.Button();
             this.btnBuscarAutor = new System.Windows.Forms.Button();
             this.btnEditarAutor = new System.Windows.Forms.Button();
-            this.btnBuscaAutor = new System.Windows.Forms.Button();
             this.boxAutor.SuspendLayout();
             this.boxLivro.SuspendLayout();
             this.SuspendLayout();
@@ -70,6 +70,17 @@
             this.boxAutor.TabIndex = 0;
             this.boxAutor.TabStop = false;
             this.boxAutor.Text = "Autor";
+            // 
+            // btnBuscaAutor
+            // 
+            this.btnBuscaAutor.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.btnBuscaAutor.Location = new System.Drawing.Point(218, 40);
+            this.btnBuscaAutor.Name = "btnBuscaAutor";
+            this.btnBuscaAutor.Size = new System.Drawing.Size(32, 32);
+            this.btnBuscaAutor.TabIndex = 7;
+            this.btnBuscaAutor.Text = "🔎";
+            this.btnBuscaAutor.UseVisualStyleBackColor = true;
+            this.btnBuscaAutor.Click += new System.EventHandler(this.btnBuscaAutor_Click);
             // 
             // txtNacionalidade
             // 
@@ -259,16 +270,6 @@
             this.btnEditarAutor.Text = "Editar Autor";
             this.btnEditarAutor.UseVisualStyleBackColor = true;
             this.btnEditarAutor.Click += new System.EventHandler(this.btnEditarAutor_Click);
-            // 
-            // btnBuscaAutor
-            // 
-            this.btnBuscaAutor.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.btnBuscaAutor.Location = new System.Drawing.Point(218, 40);
-            this.btnBuscaAutor.Name = "btnBuscaAutor";
-            this.btnBuscaAutor.Size = new System.Drawing.Size(32, 32);
-            this.btnBuscaAutor.TabIndex = 7;
-            this.btnBuscaAutor.Text = "🔎";
-            this.btnBuscaAutor.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

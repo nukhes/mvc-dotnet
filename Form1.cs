@@ -42,9 +42,9 @@ namespace MVC
             autor.Nacionalidade = txtNacionalidade.Text;
 
             autorBO.Gravar(autor);
-            MessageBox.Show("Autor Cadastrado com sucesso!");
+            SuccessMessage("Autor Cadastrado com sucesso!");
 
-            ResetBoxAutor();
+            ResetBoxAutor(false);
         }
 
         private void btnGravarLivro_Click(object sender, EventArgs e)
@@ -56,7 +56,7 @@ namespace MVC
             livro.Autor.AutorID = Convert.ToInt16(txtAutorLivroId.Text);
 
             livroBo.Gravar(livro);
-            MessageBox.Show("Livro Cadastrado com sucesso!");
+            SuccessMessage("Livro Cadastrado com sucesso!");
 
             boxLivro.Enabled = false;
             txtTitulo.Clear();
@@ -75,18 +75,18 @@ namespace MVC
                 autor.Nacionalidade = txtNacionalidade.Text;
 
                 autorBO.Editar(autor);
-                MessageBox.Show("Autor Editado com sucesso!");
+                SuccessMessage("Autor Editado com sucesso!");
 
-                ResetBoxAutor();
+                ResetBoxAutor(false);
             } catch (Exception)
             {
-                MessageBox.Show("Autor não encontrado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ErrorMessage("Autor não encontrado.");
             }
         }
 
-        private void ResetBoxAutor()
+        private void ResetBoxAutor(bool isEnabled)
         {
-            boxAutor.Enabled = false;
+            boxAutor.Enabled = isEnabled;
             txtAutorId.Clear();
             txtNome.Clear();
             txtNacionalidade.Clear();
@@ -100,6 +100,46 @@ namespace MVC
             btnEditarAutor.Enabled = true;
             btnNovoAutor.Enabled = false;
             btnGravarAutor.Enabled = false;
+        }
+
+        private void btnBuscaAutor_Click(object sender, EventArgs e)
+        {
+            Autor autor = new Autor();
+            AutorBO autorBO = new AutorBO();
+
+            try
+            {
+                autor.AutorID = Convert.ToInt16(txtAutorId.Text);
+                autorBO.Buscar(autor);
+
+                if (autor.Nome == "")
+                {
+                    ErrorMessage("Autor não encontrado.");
+                    ResetBoxAutor(true);
+                } else
+                {
+                    txtNome.Text = autor.Nome;
+                    txtNacionalidade.Text = autor.Nacionalidade;
+                }
+            } catch
+            {
+                WarningMessage("Preencha os campos corretamente.");
+            }
+        }
+
+        private void ErrorMessage(string message)
+        {
+            MessageBox.Show(message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void WarningMessage(string message)
+        {
+            MessageBox.Show(message, "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        private void SuccessMessage(string message)
+        {
+            MessageBox.Show(message, "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

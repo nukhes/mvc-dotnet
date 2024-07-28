@@ -37,7 +37,11 @@ namespace MVC.BO
 
             if (autor.AutorID >= 0)
             {
+                // usar o var elimina a necessidade de criar uma classe pra esse resultado
                 var resultadoBusca = AutorDAO.BuscarPorId(autor.AutorID);
+
+                autor.Nome = resultadoBusca.Nome;
+                autor.Nacionalidade = resultadoBusca.Nacionalidade;
             }
         }
     }
