@@ -16,6 +16,7 @@ namespace MVC.DAO
 {
     class AutorDAO
     {
+        private string errorMessage = "Não foi possível se conectar: ";
         public void Insert(Autor autor)
         {
             try
@@ -28,11 +29,7 @@ namespace MVC.DAO
                 comando.Parameters.AddWithValue("@nacionalidade", autor.Nacionalidade);
 
                 ConexaoBanco.CRUD(comando);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Não foi possível se conectar: " + ex.Message);
-            }
+            }  catch (Exception ex) { throw new Exception(errorMessage + ex.Message); }
         }
 
         public static Autor BuscarPorId(int id)
@@ -56,7 +53,9 @@ namespace MVC.DAO
             }
             else
             {
-                autor = null;
+                autor.AutorID = 0;
+                autor.Nacionalidade = "";
+                autor.Nome = "";
             }
             return autor;
         }
@@ -74,11 +73,21 @@ namespace MVC.DAO
                 comando.Parameters.AddWithValue("@autorId", autor.AutorID);
 
                 ConexaoBanco.CRUD(comando);
-            }
-            catch (Exception ex)
+            } catch (Exception ex) { throw new Exception(errorMessage + ex.Message); }
+        }
+
+        public void Delete(Autor autor)
+        {
+            try
             {
-                throw new Exception("Não foi possível se conectar " + ex.Message);
-            }
+                MySqlCommand comando = new MySqlCommand();
+                comando.CommandType = CommandType.Text;
+                comando.CommandText = "DELETE FROM Autor WHERE AutorID=@autorId";
+
+                comando.Parameters.AddWithValue("@autorId", autor.AutorID);
+
+                ConexaoBanco.CRUD(comando);
+            } catch (Exception ex) { throw new Exception(errorMessage + ex.Message); }
         }
     }
 }

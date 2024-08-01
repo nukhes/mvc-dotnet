@@ -19,13 +19,16 @@ namespace MVC
             InitializeComponent();
             boxAutor.Enabled = false;
             btnBuscaAutor.Visible = false;
-
             boxLivro.Enabled = false;
         }
+
 
         private void btnNovoAutor_Click(object sender, EventArgs e)
         {
             boxAutor.Enabled = true;
+            btnBuscaAutor.Visible = false;
+
+            ResetBoxAutor(true);
         }
 
         private void btnNovoLivro_Click(object sender, EventArgs e)
@@ -38,30 +41,36 @@ namespace MVC
             Autor autor = new Autor();
             AutorBO autorBO = new AutorBO();
 
-            autor.Nome = txtNome.Text;
-            autor.Nacionalidade = txtNacionalidade.Text;
+            // TODO: Melhorar a Verificação
+            if ((txtNome.Text != "") && (txtNacionalidade.Text != ""))
+            {
+                autor.Nome = txtNome.Text;
+                autor.Nacionalidade = txtNacionalidade.Text;
+                autorBO.Gravar(autor);
 
-            autorBO.Gravar(autor);
-            SuccessMessage("Autor Cadastrado com sucesso!");
-
-            ResetBoxAutor(false);
+                Mensagem.SuccessMessage("Autor Cadastrado com sucesso!");
+                ResetBoxAutor(false);
+            } else { Mensagem.ErrorMessage("Preencha os campos corretamente."); }
         }
 
         private void btnGravarLivro_Click(object sender, EventArgs e)
         {
-            Livro livro = new Livro();
-            LivroBO livroBo = new LivroBO();
-            livro.Titulo = txtTitulo.Text;
-            livro.Datapub = Convert.ToDateTime(txtDataPub.Text);
-            livro.Autor.AutorID = Convert.ToInt16(txtAutorLivroId.Text);
+            try
+            {
+                Livro livro = new Livro();
+                LivroBO livroBo = new LivroBO();
+                livro.Titulo = txtTitulo.Text;
+                livro.Datapub = Convert.ToDateTime(txtDataPub.Text);
+                livro.Autor.AutorID = Convert.ToInt16(txtAutorLivroId.Text);
 
-            livroBo.Gravar(livro);
-            SuccessMessage("Livro Cadastrado com sucesso!");
+                livroBo.Gravar(livro);
+                Mensagem.SuccessMessage("Livro Cadastrado com sucesso!");
 
-            boxLivro.Enabled = false;
-            txtTitulo.Clear();
-            txtDataPub.Clear();
-            txtAutorLivroId.Clear();
+                boxLivro.Enabled = false;
+                txtTitulo.Clear();
+                txtDataPub.Clear();
+                txtAutorLivroId.Clear();
+            } catch { Mensagem.ErrorMessage("Preencha os campos corretamente");  }
         }
 
         private void btnEditarAutor_Click(object sender, EventArgs e)
@@ -75,13 +84,10 @@ namespace MVC
                 autor.Nacionalidade = txtNacionalidade.Text;
 
                 autorBO.Editar(autor);
-                SuccessMessage("Autor Editado com sucesso!");
+                Mensagem.SuccessMessage("Autor Editado com sucesso!");
 
                 ResetBoxAutor(false);
-            } catch (Exception)
-            {
-                ErrorMessage("Autor não encontrado.");
-            }
+            } catch { Mensagem.ErrorMessage("Autor não encontrado."); }
         }
 
         private void ResetBoxAutor(bool isEnabled)
@@ -98,7 +104,7 @@ namespace MVC
             txtAutorId.Enabled = true;
             boxAutor.Enabled = true;
             btnEditarAutor.Enabled = true;
-            btnNovoAutor.Enabled = false;
+            btnNovoAutor.Enabled = true;
             btnGravarAutor.Enabled = false;
         }
 
@@ -114,32 +120,30 @@ namespace MVC
 
                 if (autor.Nome == "")
                 {
-                    ErrorMessage("Autor não encontrado.");
+                    Mensagem.ErrorMessage("Autor não encontrado.");
                     ResetBoxAutor(true);
                 } else
                 {
                     txtNome.Text = autor.Nome;
                     txtNacionalidade.Text = autor.Nacionalidade;
                 }
-            } catch
+            } catch { Mensagem.WarningMessage("Preencha os campos corretamente."); }
+        }
+
+        private void btnExcluirAutor_Click(object sender, EventArgs e)
+        {
+            Autor autor = new Autor();
+            AutorBO autorBO = new AutorBO();
+
+            try
             {
-                WarningMessage("Preencha os campos corretamente.");
-            }
-        }
+                autor.AutorID = Convert.ToInt16(txtAutorId.Text);
+                autorBO.Deletar(autor);
 
-        private void ErrorMessage(string message)
-        {
-            MessageBox.Show(message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
+                Mensagem.SuccessMessage("Autor excluido com sucesso!");
 
-        private void WarningMessage(string message)
-        {
-            MessageBox.Show(message, "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-
-        private void SuccessMessage(string message)
-        {
-            MessageBox.Show(message, "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ResetBoxAutor(false);
+            } catch { Mensagem.WarningMessage("Preencha os campos corretamente."); }
         }
     }
 }

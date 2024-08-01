@@ -51,6 +51,7 @@
             this.btnNovoLivro = new System.Windows.Forms.Button();
             this.btnBuscarAutor = new System.Windows.Forms.Button();
             this.btnEditarAutor = new System.Windows.Forms.Button();
+            this.btnExcluirAutor = new System.Windows.Forms.Button();
             this.boxAutor.SuspendLayout();
             this.boxLivro.SuspendLayout();
             this.SuspendLayout();
@@ -271,11 +272,22 @@
             this.btnEditarAutor.UseVisualStyleBackColor = true;
             this.btnEditarAutor.Click += new System.EventHandler(this.btnEditarAutor_Click);
             // 
+            // btnExcluirAutor
+            // 
+            this.btnExcluirAutor.Location = new System.Drawing.Point(321, 164);
+            this.btnExcluirAutor.Name = "btnExcluirAutor";
+            this.btnExcluirAutor.Size = new System.Drawing.Size(111, 32);
+            this.btnExcluirAutor.TabIndex = 14;
+            this.btnExcluirAutor.Text = "Excluir Autor";
+            this.btnExcluirAutor.UseVisualStyleBackColor = true;
+            this.btnExcluirAutor.Click += new System.EventHandler(this.btnExcluirAutor_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(444, 463);
+            this.ClientSize = new System.Drawing.Size(453, 704);
+            this.Controls.Add(this.btnExcluirAutor);
             this.Controls.Add(this.btnEditarAutor);
             this.Controls.Add(this.btnBuscarAutor);
             this.Controls.Add(this.btnGravarLivro);
@@ -322,6 +334,7 @@
         private System.Windows.Forms.Button btnBuscarAutor;
         private System.Windows.Forms.Button btnEditarAutor;
         private System.Windows.Forms.Button btnBuscaAutor;
+        private System.Windows.Forms.Button btnExcluirAutor;
     }
 }
 

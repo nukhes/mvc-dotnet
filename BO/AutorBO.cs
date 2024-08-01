@@ -44,5 +44,15 @@ namespace MVC.BO
                 autor.Nacionalidade = resultadoBusca.Nacionalidade;
             }
         }
+
+        public void Deletar(Autor autor)
+        {
+            AutorDAO autorDAO = new AutorDAO();
+
+            if (autor.AutorID > 0)
+            {
+                autorDAO.Delete(autor);
+            }
+        }
     }
 }
