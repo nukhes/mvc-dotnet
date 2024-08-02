@@ -25,5 +25,37 @@ namespace MVC.BO
                 }
             }
         }
+
+        public void Editar(Livro livro)
+        {
+            LivroDAO livroDAO = new LivroDAO();
+
+                livroDAO.Update(livro);
+        }
+
+        public void Deletar(Livro livro)
+        {
+            LivroDAO livroDAO = new LivroDAO();
+
+            if (livro.LivroId > 0)
+            {
+                livroDAO.Delete(livro);
+            }
+        }
+
+        public void Buscar(Livro livro)
+        {
+            LivroDAO livroDAO = new LivroDAO();
+
+            if (livro.LivroId > 0)
+            {
+                // usar o var elimina a necessidade de criar uma classe pra esse resultado
+                var resultadoBusca = livroDAO.BuscarPorId(livro.LivroId);
+
+                livro.Titulo = resultadoBusca.Titulo;
+                livro.Autor = resultadoBusca.Autor;
+                livro.Datapub = resultadoBusca.Datapub;
+            }
+        }
     }
 }
