@@ -16,7 +16,7 @@ namespace MVC.DAO
         {
             MySqlCommand comando = new MySqlCommand();
             comando.CommandType = CommandType.Text;
-            comando.CommandText = "INSERT INTRO Livro(Titulo, DtPublicacao, AutorID) values(@titulo, @dtPub, @autorID)";
+            comando.CommandText = "INSERT INTO Livro(Titulo, DtPublicacao, AutorID) values(@titulo, @dtPub, @autorID)";
 
             comando.Parameters.AddWithValue("@titulo", livro.Titulo);
             comando.Parameters.AddWithValue("@dtPub", livro.Datapub);
@@ -30,13 +30,16 @@ namespace MVC.DAO
             MySqlCommand comando = new MySqlCommand();
             comando.CommandType = CommandType.Text;
             comando.CommandText = "UPDATE Livro SET Titulo=@titulo, DtPublicacao=@dtPub, AutorID=@autorID WHERE LivroID=@livroID";
-
+            
             comando.Parameters.AddWithValue("@titulo", livro.Titulo);
             comando.Parameters.AddWithValue("@dtPub", livro.Datapub);
             comando.Parameters.AddWithValue("autorID", livro.Autor.AutorID);
             comando.Parameters.AddWithValue("livroID", livro.LivroId);
 
+
+            //debug
             ConexaoBanco.CRUD(comando);
+            
         }
 
         public void Delete(Livro livro)
