@@ -20,7 +20,7 @@ namespace MVC.Model
 
         public Livro()
         {
-            autor = new Autor();
+            Autor = new Autor();
         }
     }
 }
