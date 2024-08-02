@@ -19,21 +19,39 @@ namespace MVC
             InitializeComponent();
             boxAutor.Enabled = false;
             btnBuscaAutor.Visible = false;
+            btnBuscaLivro.Visible = false;
             boxLivro.Enabled = false;
+            txtAutorId.Width = 201;
+            txtLivroId.Width = 201;
         }
 
 
         private void btnNovoAutor_Click(object sender, EventArgs e)
         {
-            boxAutor.Enabled = true;
+            btnGravarAutor.Enabled = true;
+            btnExcluirAutor.Enabled = true;
+            btnEditarAutor.Enabled = true;
+
             btnBuscaAutor.Visible = false;
+            btnBuscaAutorPorNome.Visible = false;
+
+            txtAutorId.Width = 201;
 
             ResetBoxAutor(true);
         }
 
         private void btnNovoLivro_Click(object sender, EventArgs e)
         {
-            boxLivro.Enabled= true;
+            btnGravarLivro.Enabled = true;
+            btnExcluirLivro.Enabled = true;
+            btnEditarLivro.Enabled = true;
+
+            btnBuscaLivro.Visible = false;
+            btnBuscaLivroPorNome.Visible = false;
+
+            txtLivroId.Width = 201;
+
+            ResetBoxLivro(true);
         }
 
         private void btnGravarAutor_Click(object sender, EventArgs e)
@@ -70,6 +88,8 @@ namespace MVC
                 txtTitulo.Clear();
                 txtDataPub.Clear();
                 txtAutorLivroId.Clear();
+
+                ResetBoxLivro(false);
             } catch { Mensagem.ErrorMessage("Preencha os campos corretamente");  }
         }
 
@@ -98,14 +118,29 @@ namespace MVC
             txtNacionalidade.Clear();
         }
 
+        private void ResetBoxLivro(bool isEnabled)
+        {
+            boxLivro.Enabled = isEnabled;
+            txtLivroId.Clear();
+            txtTitulo.Clear();
+            txtDataPub.Clear();
+            txtAutorLivroId.Clear();
+        }
+
         private void btnBuscarAutor_Click(object sender, EventArgs e)
         {
             btnBuscaAutor.Visible = true;
+            btnBuscaAutorPorNome.Visible = true;
             txtAutorId.Enabled = true;
-            boxAutor.Enabled = true;
+            ResetBoxAutor(true);
             btnEditarAutor.Enabled = true;
             btnNovoAutor.Enabled = true;
+
             btnGravarAutor.Enabled = false;
+            btnEditarAutor.Enabled = false;
+            btnExcluirAutor.Enabled = false;
+
+            txtAutorId.Width = 108;
         }
 
         private void btnBuscaAutor_Click(object sender, EventArgs e)
@@ -144,6 +179,81 @@ namespace MVC
 
                 ResetBoxAutor(false);
             } catch { Mensagem.WarningMessage("Preencha os campos corretamente."); }
+        }
+
+        private void BtnEditarLivro_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Livro livro = new Livro();
+                LivroBO livroBo = new LivroBO();
+                livro.Titulo = txtTitulo.Text;
+                livro.Datapub = DateTime.Parse(txtDataPub.Text);
+                livro.Autor.AutorID = Convert.ToInt16(txtAutorLivroId.Text);
+
+                livroBo.Editar(livro);
+                Mensagem.SuccessMessage("Livro Editado com sucesso!");
+
+                ResetBoxLivro(false);
+            }
+            catch { Mensagem.ErrorMessage("Livro não encontrado."); }
+        }
+
+        private void BtnBuscarLivro_Click(object sender, EventArgs e)
+        {
+            btnBuscaLivro.Visible = true;
+            btnBuscaLivroPorNome.Visible = true;
+            txtLivroId.Enabled = true;
+            ResetBoxLivro(true);
+            btnEditarLivro.Enabled = true;
+            btnNovoLivro.Enabled = true;
+
+            btnGravarLivro.Enabled = false;
+            btnEditarLivro.Enabled = false;
+            btnExcluirLivro.Enabled = false;
+
+            txtLivroId.Width = 108;
+        }
+
+        private void BtnExcluirLivro_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Livro livro = new Livro();
+                LivroBO livroBo = new LivroBO();
+                livro.LivroId = Convert.ToInt16(txtLivroId.Text);
+
+                livroBo.Deletar(livro);
+
+                Mensagem.SuccessMessage("Livro excluido com sucesso!");
+
+                ResetBoxLivro(false);
+            }
+            catch { Mensagem.WarningMessage("Preencha os campos corretamente."); }
+        }
+
+        private void BtnBuscaLivro_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Livro livro = new Livro();
+                LivroBO livroBo = new LivroBO();
+                livro.LivroId = Convert.ToInt16(txtLivroId.Text);
+                livroBo.Buscar(livro);
+
+                if (livro.Titulo == "")
+                {
+                    Mensagem.ErrorMessage("Livro não encontrado.");
+                    ResetBoxAutor(true);
+                }
+                else
+                {
+                    txtTitulo.Text = livro.Titulo;
+                    txtDataPub.Text = Convert.ToString(livro.Datapub);
+                    txtAutorId.Text = Convert.ToString(livro.Autor.AutorID);
+                }
+            }
+            catch { Mensagem.WarningMessage("Preencha os campos corretamente."); }
         }
     }
 }
