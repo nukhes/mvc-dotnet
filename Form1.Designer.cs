@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.boxAutor = new System.Windows.Forms.GroupBox();
+            this.btnBuscaAutorPorNome = new System.Windows.Forms.Button();
             this.btnBuscaAutor = new System.Windows.Forms.Button();
             this.txtNacionalidade = new System.Windows.Forms.TextBox();
             this.txtNome = new System.Windows.Forms.TextBox();
@@ -37,6 +38,8 @@
             this.lblNome = new System.Windows.Forms.Label();
             this.lblAutorId = new System.Windows.Forms.Label();
             this.boxLivro = new System.Windows.Forms.GroupBox();
+            this.btnBuscaLivroPorNome = new System.Windows.Forms.Button();
+            this.btnBuscaLivro = new System.Windows.Forms.Button();
             this.txtAutorLivroId = new System.Windows.Forms.TextBox();
             this.lblAutorId2 = new System.Windows.Forms.Label();
             this.txtDataPub = new System.Windows.Forms.TextBox();
@@ -55,10 +58,7 @@
             this.btnBuscarLivro = new System.Windows.Forms.Button();
             this.btnEditarLivro = new System.Windows.Forms.Button();
             this.btnExcluirLivro = new System.Windows.Forms.Button();
-            this.btnBuscaLivro = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.btnBuscaLivroPorNome = new System.Windows.Forms.Button();
-            this.btnBuscaAutorPorNome = new System.Windows.Forms.Button();
             this.boxAutor.SuspendLayout();
             this.boxLivro.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -81,6 +81,16 @@
             this.boxAutor.TabStop = false;
             this.boxAutor.Text = "Autor";
             // 
+            // btnBuscaAutorPorNome
+            // 
+            this.btnBuscaAutorPorNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btnBuscaAutorPorNome.Location = new System.Drawing.Point(201, 31);
+            this.btnBuscaAutorPorNome.Name = "btnBuscaAutorPorNome";
+            this.btnBuscaAutorPorNome.Size = new System.Drawing.Size(68, 44);
+            this.btnBuscaAutorPorNome.TabIndex = 10;
+            this.btnBuscaAutorPorNome.Text = "🔎Nome";
+            this.btnBuscaAutorPorNome.UseVisualStyleBackColor = true;
+            // 
             // btnBuscaAutor
             // 
             this.btnBuscaAutor.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
@@ -96,14 +106,14 @@
             // 
             this.txtNacionalidade.Location = new System.Drawing.Point(49, 147);
             this.txtNacionalidade.Name = "txtNacionalidade";
-            this.txtNacionalidade.Size = new System.Drawing.Size(220, 20);
+            this.txtNacionalidade.Size = new System.Drawing.Size(201, 20);
             this.txtNacionalidade.TabIndex = 6;
             // 
             // txtNome
             // 
             this.txtNome.Location = new System.Drawing.Point(49, 95);
             this.txtNome.Name = "txtNome";
-            this.txtNome.Size = new System.Drawing.Size(220, 20);
+            this.txtNome.Size = new System.Drawing.Size(201, 20);
             this.txtNome.TabIndex = 5;
             // 
             // txtAutorId
@@ -158,6 +168,27 @@
             this.boxLivro.TabIndex = 7;
             this.boxLivro.TabStop = false;
             this.boxLivro.Text = "Livro";
+            // 
+            // btnBuscaLivroPorNome
+            // 
+            this.btnBuscaLivroPorNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btnBuscaLivroPorNome.Location = new System.Drawing.Point(201, 28);
+            this.btnBuscaLivroPorNome.Name = "btnBuscaLivroPorNome";
+            this.btnBuscaLivroPorNome.Size = new System.Drawing.Size(68, 51);
+            this.btnBuscaLivroPorNome.TabIndex = 9;
+            this.btnBuscaLivroPorNome.Text = "🔎Nome";
+            this.btnBuscaLivroPorNome.UseVisualStyleBackColor = true;
+            // 
+            // btnBuscaLivro
+            // 
+            this.btnBuscaLivro.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.btnBuscaLivro.Location = new System.Drawing.Point(163, 29);
+            this.btnBuscaLivro.Name = "btnBuscaLivro";
+            this.btnBuscaLivro.Size = new System.Drawing.Size(32, 50);
+            this.btnBuscaLivro.TabIndex = 8;
+            this.btnBuscaLivro.Text = "🔎";
+            this.btnBuscaLivro.UseVisualStyleBackColor = true;
+            this.btnBuscaLivro.Click += new System.EventHandler(this.BtnBuscaLivro_Click);
             // 
             // txtAutorLivroId
             // 
@@ -323,17 +354,6 @@
             this.btnExcluirLivro.UseVisualStyleBackColor = true;
             this.btnExcluirLivro.Click += new System.EventHandler(this.BtnExcluirLivro_Click);
             // 
-            // btnBuscaLivro
-            // 
-            this.btnBuscaLivro.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.btnBuscaLivro.Location = new System.Drawing.Point(163, 29);
-            this.btnBuscaLivro.Name = "btnBuscaLivro";
-            this.btnBuscaLivro.Size = new System.Drawing.Size(32, 50);
-            this.btnBuscaLivro.TabIndex = 8;
-            this.btnBuscaLivro.Text = "🔎";
-            this.btnBuscaLivro.UseVisualStyleBackColor = true;
-            this.btnBuscaLivro.Click += new System.EventHandler(this.BtnBuscaLivro_Click);
-            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -342,26 +362,6 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(345, 485);
             this.dataGridView1.TabIndex = 19;
-            // 
-            // btnBuscaLivroPorNome
-            // 
-            this.btnBuscaLivroPorNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.btnBuscaLivroPorNome.Location = new System.Drawing.Point(201, 28);
-            this.btnBuscaLivroPorNome.Name = "btnBuscaLivroPorNome";
-            this.btnBuscaLivroPorNome.Size = new System.Drawing.Size(68, 51);
-            this.btnBuscaLivroPorNome.TabIndex = 9;
-            this.btnBuscaLivroPorNome.Text = "🔎Nome";
-            this.btnBuscaLivroPorNome.UseVisualStyleBackColor = true;
-            // 
-            // btnBuscaAutorPorNome
-            // 
-            this.btnBuscaAutorPorNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.btnBuscaAutorPorNome.Location = new System.Drawing.Point(201, 31);
-            this.btnBuscaAutorPorNome.Name = "btnBuscaAutorPorNome";
-            this.btnBuscaAutorPorNome.Size = new System.Drawing.Size(68, 44);
-            this.btnBuscaAutorPorNome.TabIndex = 10;
-            this.btnBuscaAutorPorNome.Text = "🔎Nome";
-            this.btnBuscaAutorPorNome.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

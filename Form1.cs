@@ -20,6 +20,8 @@ namespace MVC
             boxAutor.Enabled = false;
             btnBuscaAutor.Visible = false;
             btnBuscaLivro.Visible = false;
+            btnBuscaLivroPorNome.Visible = false;
+            btnBuscaAutorPorNome.Visible = false;
             boxLivro.Enabled = false;
             txtAutorId.Width = 201;
             txtLivroId.Width = 201;
