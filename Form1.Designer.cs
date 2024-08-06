@@ -58,10 +58,10 @@
             this.btnBuscarLivro = new System.Windows.Forms.Button();
             this.btnEditarLivro = new System.Windows.Forms.Button();
             this.btnExcluirLivro = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataResultado = new System.Windows.Forms.DataGridView();
             this.boxAutor.SuspendLayout();
             this.boxLivro.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataResultado)).BeginInit();
             this.SuspendLayout();
             // 
             // boxAutor
@@ -84,17 +84,18 @@
             // btnBuscaAutorPorNome
             // 
             this.btnBuscaAutorPorNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.btnBuscaAutorPorNome.Location = new System.Drawing.Point(201, 31);
+            this.btnBuscaAutorPorNome.Location = new System.Drawing.Point(187, 31);
             this.btnBuscaAutorPorNome.Name = "btnBuscaAutorPorNome";
-            this.btnBuscaAutorPorNome.Size = new System.Drawing.Size(68, 44);
+            this.btnBuscaAutorPorNome.Size = new System.Drawing.Size(63, 44);
             this.btnBuscaAutorPorNome.TabIndex = 10;
             this.btnBuscaAutorPorNome.Text = "🔎Nome";
             this.btnBuscaAutorPorNome.UseVisualStyleBackColor = true;
+            this.btnBuscaAutorPorNome.Click += new System.EventHandler(this.BtnBuscaAutorPorNome_Click);
             // 
             // btnBuscaAutor
             // 
             this.btnBuscaAutor.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.btnBuscaAutor.Location = new System.Drawing.Point(163, 31);
+            this.btnBuscaAutor.Location = new System.Drawing.Point(149, 31);
             this.btnBuscaAutor.Name = "btnBuscaAutor";
             this.btnBuscaAutor.Size = new System.Drawing.Size(32, 44);
             this.btnBuscaAutor.TabIndex = 7;
@@ -120,7 +121,7 @@
             // 
             this.txtAutorId.Location = new System.Drawing.Point(49, 45);
             this.txtAutorId.Name = "txtAutorId";
-            this.txtAutorId.Size = new System.Drawing.Size(108, 20);
+            this.txtAutorId.Size = new System.Drawing.Size(94, 20);
             this.txtAutorId.TabIndex = 4;
             // 
             // lblNacionalidade
@@ -172,7 +173,7 @@
             // btnBuscaLivroPorNome
             // 
             this.btnBuscaLivroPorNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.btnBuscaLivroPorNome.Location = new System.Drawing.Point(201, 28);
+            this.btnBuscaLivroPorNome.Location = new System.Drawing.Point(182, 28);
             this.btnBuscaLivroPorNome.Name = "btnBuscaLivroPorNome";
             this.btnBuscaLivroPorNome.Size = new System.Drawing.Size(68, 51);
             this.btnBuscaLivroPorNome.TabIndex = 9;
@@ -182,7 +183,7 @@
             // btnBuscaLivro
             // 
             this.btnBuscaLivro.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.btnBuscaLivro.Location = new System.Drawing.Point(163, 29);
+            this.btnBuscaLivro.Location = new System.Drawing.Point(144, 29);
             this.btnBuscaLivro.Name = "btnBuscaLivro";
             this.btnBuscaLivro.Size = new System.Drawing.Size(32, 50);
             this.btnBuscaLivro.TabIndex = 8;
@@ -224,7 +225,7 @@
             // 
             this.txtLivroId.Location = new System.Drawing.Point(49, 45);
             this.txtLivroId.Name = "txtLivroId";
-            this.txtLivroId.Size = new System.Drawing.Size(108, 20);
+            this.txtLivroId.Size = new System.Drawing.Size(89, 20);
             this.txtLivroId.TabIndex = 4;
             // 
             // label1
@@ -354,21 +355,21 @@
             this.btnExcluirLivro.UseVisualStyleBackColor = true;
             this.btnExcluirLivro.Click += new System.EventHandler(this.BtnExcluirLivro_Click);
             // 
-            // dataGridView1
+            // dataResultado
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.GridColor = System.Drawing.SystemColors.ControlLight;
-            this.dataGridView1.Location = new System.Drawing.Point(466, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(345, 485);
-            this.dataGridView1.TabIndex = 19;
+            this.dataResultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataResultado.GridColor = System.Drawing.SystemColors.ControlLight;
+            this.dataResultado.Location = new System.Drawing.Point(466, 12);
+            this.dataResultado.Name = "dataResultado";
+            this.dataResultado.Size = new System.Drawing.Size(345, 485);
+            this.dataResultado.TabIndex = 19;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(818, 545);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataResultado);
             this.Controls.Add(this.btnExcluirLivro);
             this.Controls.Add(this.btnEditarLivro);
             this.Controls.Add(this.btnBuscarLivro);
@@ -390,7 +391,7 @@
             this.boxAutor.PerformLayout();
             this.boxLivro.ResumeLayout(false);
             this.boxLivro.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataResultado)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -427,7 +428,7 @@
         private System.Windows.Forms.Button btnBuscaLivro;
         private System.Windows.Forms.Button btnBuscaAutorPorNome;
         private System.Windows.Forms.Button btnBuscaLivroPorNome;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataResultado;
     }
 }
 
