@@ -22,9 +22,16 @@ namespace MVC
             btnBuscaLivro.Visible = false;
             btnBuscaLivroPorNome.Visible = false;
             btnBuscaAutorPorNome.Visible = false;
+            exibirCaixaResultado(false);
             boxLivro.Enabled = false;
             txtAutorId.Width = 201;
             txtLivroId.Width = 201;
+        }
+
+        private void exibirCaixaResultado(bool state)
+        {
+            dataResultado.DataSource = "";
+            dataResultado.Visible = state;
         }
 
 
@@ -40,6 +47,7 @@ namespace MVC
             txtAutorId.Width = 201;
 
             ResetBoxAutor(true);
+            exibirCaixaResultado(false);
         }
 
         private void btnNovoLivro_Click(object sender, EventArgs e)
@@ -54,6 +62,7 @@ namespace MVC
             txtLivroId.Width = 201;
 
             ResetBoxLivro(true);
+            exibirCaixaResultado(false);
         }
 
         private void btnGravarAutor_Click(object sender, EventArgs e)
@@ -142,7 +151,7 @@ namespace MVC
             btnEditarAutor.Enabled = false;
             btnExcluirAutor.Enabled = false;
 
-            txtAutorId.Width = 108;
+            txtAutorId.Width = 89;
         }
 
         private void btnBuscaAutor_Click(object sender, EventArgs e)
@@ -214,7 +223,7 @@ namespace MVC
             btnEditarLivro.Enabled = false;
             btnExcluirLivro.Enabled = false;
 
-            txtLivroId.Width = 108;
+            txtLivroId.Width = 89;
         }
 
         private void BtnExcluirLivro_Click(object sender, EventArgs e)
@@ -256,6 +265,19 @@ namespace MVC
                 }
             }
             catch { Mensagem.WarningMessage("Preencha os campos corretamente."); }
+        }
+
+        private void BtnBuscaAutorPorNome_Click(object sender, EventArgs e)
+        {
+            Autor autor = new Autor();
+            AutorBO autorBO = new AutorBO();
+
+            try
+            {
+                exibirCaixaResultado(true);
+                autor.Nome = txtNome.Text;
+                dataResultado.DataSource = autorBO.BuscarPorNome(autor);
+            } catch { Mensagem.WarningMessage("Preencha os campos corretamente."); }
         }
     }
 }

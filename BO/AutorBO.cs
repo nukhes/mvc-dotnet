@@ -54,5 +54,18 @@ namespace MVC.BO
                 autorDAO.Delete(autor);
             }
         }
+
+        public IList<Autor> BuscarPorNome(Autor autor)
+        {
+            AutorDAO autorDAO = new AutorDAO();
+
+            if (autor.Nome != "")
+            {
+                IList<Autor> autorTemp = autorDAO.BuscaPorAutor(autor.Nome);
+                return autorTemp;
+            }
+
+            return null;
+        }
     }
 }

@@ -89,5 +89,33 @@ namespace MVC.DAO
                 ConexaoBanco.CRUD(comando);
             } catch (Exception ex) { throw new Exception(errorMessage + ex.Message); }
         }
+
+        public IList<Autor> BuscaPorAutor(string nome)
+        {
+            MySqlCommand comando = new MySqlCommand();
+            comando.CommandType = CommandType.Text;
+            comando.CommandText = "SELECT * FROM Autor WHERE nome like @nome";
+
+            comando.Parameters.AddWithValue("@nome", "%" + nome + "%");
+            MySqlDataReader dr = ConexaoBanco.Selecionar(comando);
+
+            // lista de "autor"
+            IList<Autor> autores = new List<Autor>();
+
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+                    Autor autor = new Autor();
+                    autor.Nome = (string)dr["nome"];
+                    autor.AutorID = (int)dr["AutorID"];
+                    autor.Nacionalidade = (string)dr["nacionalidade"];
+
+                    autores.Add(autor);
+                }
+            } else { autores = null; }
+
+            return autores;
+        }
     }
 }
