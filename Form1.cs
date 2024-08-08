@@ -271,13 +271,25 @@ namespace MVC
         {
             Autor autor = new Autor();
             AutorBO autorBO = new AutorBO();
-
             try
             {
                 exibirCaixaResultado(true);
                 autor.Nome = txtNome.Text;
                 dataResultado.DataSource = autorBO.BuscarPorNome(autor);
             } catch { Mensagem.WarningMessage("Preencha os campos corretamente."); }
+        }
+
+        private void btnBuscaLivroPorNome_Click(object sender, EventArgs e)
+        {
+            Livro livro = new Livro();
+            LivroBO livroBO = new LivroBO();
+            try
+            {
+                exibirCaixaResultado(true);
+                livro.Titulo = txtTitulo.Text;
+                dataResultado.DataSource = livroBO.BuscarPorTitulo(livro);
+            }
+            catch { Mensagem.WarningMessage("Preencha os campos corretamente."); }
         }
     }
 }

@@ -57,5 +57,17 @@ namespace MVC.BO
                 livro.Datapub = resultadoBusca.Datapub;
             }
         }
+
+        public IList<Livro> BuscarPorTitulo(Livro livro)
+        {
+            LivroDAO livroDAO = new LivroDAO();
+
+            if (livro.Titulo != "")
+            {
+                IList<Livro> livroTemp = livroDAO.BuscaPorLivro(livro.Titulo);
+                return livroTemp;
+            } else { return null; }
+            
+        }
     }
 }

@@ -179,6 +179,7 @@
             this.btnBuscaLivroPorNome.TabIndex = 9;
             this.btnBuscaLivroPorNome.Text = "🔎Nome";
             this.btnBuscaLivroPorNome.UseVisualStyleBackColor = true;
+            this.btnBuscaLivroPorNome.Click += new System.EventHandler(this.btnBuscaLivroPorNome_Click);
             // 
             // btnBuscaLivro
             // 

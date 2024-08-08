@@ -79,5 +79,33 @@ namespace MVC.DAO
             }
             return livro;
         }
+        public IList<Livro> BuscaPorLivro(string titulo)
+        {
+            MySqlCommand comando = new MySqlCommand();
+            comando.CommandType = CommandType.Text;
+            comando.CommandText = "SELECT * FROM Livro WHERE Titulo like @titulo";
+
+            comando.Parameters.AddWithValue("@titulo", "%" + titulo + "%");
+            MySqlDataReader dr = ConexaoBanco.Selecionar(comando);
+
+            // lista de "autor"
+            IList<Livro> livros = new List<Livro>();
+
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+                    // Titulo, DtPublicacao, AutorID
+                    Livro livro = new Livro();
+                    livro.Titulo = (string)dr["Titulo"];
+                    livro.Autor.AutorID = (int)dr["AutorID"];
+
+                    livros.Add(livro);
+                }
+            }
+            else { livros = null; }
+
+            return livros;
+        }
     }
 }

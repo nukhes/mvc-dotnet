@@ -21,7 +21,7 @@ namespace MVC.DAO
             string uid = "root";
             string password = "";
 
-            string stringConexao = $"SERVER=localhost;DATABASE={database};UID={uid};PASSWORD={password}";
+            string stringConexao = $"SERVER=127.0.0.1;DATABASE={database};UID={uid};PASSWORD={password}";
             MySqlConnection conexao = new MySqlConnection(stringConexao);
             conexao.Open();
             return conexao;

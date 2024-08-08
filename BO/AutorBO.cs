@@ -63,9 +63,7 @@ namespace MVC.BO
             {
                 IList<Autor> autorTemp = autorDAO.BuscaPorAutor(autor.Nome);
                 return autorTemp;
-            }
-
-            return null;
+            } else { return null; }
         }
     }
 }
