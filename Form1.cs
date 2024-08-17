@@ -40,6 +40,7 @@ namespace MVC
             btnGravarAutor.Enabled = true;
             btnExcluirAutor.Enabled = true;
             btnEditarAutor.Enabled = true;
+            txtAutorId.Enabled = false;
 
             btnBuscaAutor.Visible = false;
             btnBuscaAutorPorNome.Visible = false;
@@ -55,6 +56,7 @@ namespace MVC
             btnGravarLivro.Enabled = true;
             btnExcluirLivro.Enabled = true;
             btnEditarLivro.Enabled = true;
+            txtLivroId.Enabled = false;
 
             btnBuscaLivro.Visible = false;
             btnBuscaLivroPorNome.Visible = false;
@@ -106,25 +108,33 @@ namespace MVC
 
         private void btnEditarAutor_Click(object sender, EventArgs e)
         {
-            try
+            if (txtAutorId.Enabled)
             {
-                Autor autor = new Autor();
-                AutorBO autorBO = new AutorBO();
-                autor.AutorID = Convert.ToInt16(txtAutorId.Text);
-                autor.Nome = txtNome.Text;
-                autor.Nacionalidade = txtNacionalidade.Text;
+                try
+                {
+                    Autor autor = new Autor();
+                    AutorBO autorBO = new AutorBO();
+                    autor.AutorID = Convert.ToInt16(txtAutorId.Text);
+                    autor.Nome = txtNome.Text;
+                    autor.Nacionalidade = txtNacionalidade.Text;
 
-                autorBO.Editar(autor);
-                Mensagem.SuccessMessage("Autor Editado com sucesso!");
+                    autorBO.Editar(autor);
+                    Mensagem.SuccessMessage("Autor Editado com sucesso!");
 
-                ResetBoxAutor(false);
-            } catch { Mensagem.ErrorMessage("Autor não encontrado."); }
+                    ResetBoxAutor(false);
+                }
+                catch { Mensagem.ErrorMessage("Autor não encontrado."); }
+            } else
+            {
+                txtAutorId.Enabled = true;
+            }
         }
 
         private void ResetBoxAutor(bool isEnabled)
         {
             boxAutor.Enabled = isEnabled;
             txtAutorId.Clear();
+            txtAutorId.Enabled = false;
             txtNome.Clear();
             txtNacionalidade.Clear();
         }
@@ -133,6 +143,7 @@ namespace MVC
         {
             boxLivro.Enabled = isEnabled;
             txtLivroId.Clear();
+            txtLivroId.Enabled = false;
             txtTitulo.Clear();
             txtDataPub.Clear();
             txtAutorLivroId.Clear();
@@ -142,7 +153,6 @@ namespace MVC
         {
             btnBuscaAutor.Visible = true;
             btnBuscaAutorPorNome.Visible = true;
-            txtAutorId.Enabled = true;
             ResetBoxAutor(true);
             btnEditarAutor.Enabled = true;
             btnNovoAutor.Enabled = true;
@@ -151,6 +161,7 @@ namespace MVC
             btnEditarAutor.Enabled = false;
             btnExcluirAutor.Enabled = false;
 
+            txtAutorId.Enabled = true;
             txtAutorId.Width = 89;
         }
 
@@ -194,20 +205,27 @@ namespace MVC
 
         private void BtnEditarLivro_Click(object sender, EventArgs e)
         {
-            try
+            if (txtLivroId.Enabled)
             {
-                Livro livro = new Livro();
-                LivroBO livroBo = new LivroBO();
-                livro.Titulo = txtTitulo.Text;
-                livro.Datapub = DateTime.Parse(txtDataPub.Text);
-                livro.Autor.AutorID = Convert.ToInt16(txtAutorLivroId.Text);
+                try
+                {
+                    Autor autor = new Autor();
+                    AutorBO autorBO = new AutorBO();
+                    autor.AutorID = Convert.ToInt16(txtAutorId.Text);
+                    autor.Nome = txtNome.Text;
+                    autor.Nacionalidade = txtNacionalidade.Text;
 
-                livroBo.Editar(livro);
-                Mensagem.SuccessMessage("Livro Editado com sucesso!");
+                    autorBO.Editar(autor);
+                    Mensagem.SuccessMessage("Autor Editado com sucesso!");
 
-                ResetBoxLivro(false);
+                    ResetBoxAutor(false);
+                }
+                catch { Mensagem.ErrorMessage("Autor não encontrado."); }
+            } else
+            {
+                txtLivroId.Enabled = true;
+
             }
-            catch { Mensagem.ErrorMessage("Livro não encontrado."); }
         }
 
         private void BtnBuscarLivro_Click(object sender, EventArgs e)
@@ -223,6 +241,7 @@ namespace MVC
             btnEditarLivro.Enabled = false;
             btnExcluirLivro.Enabled = false;
 
+            txtLivroId.Enabled = true;
             txtLivroId.Width = 89;
         }
 
