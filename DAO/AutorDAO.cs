@@ -6,30 +6,28 @@ using System.Threading.Tasks;
 
 // referencias mysql
 using MySql.Data.MySqlClient;
-using MySql.Data;
 using System.Data;
-
 using MVC.Model;
 
 
 namespace MVC.DAO
 {
-    class AutorDAO
+    class AutorDAO : DAO
     {
-        private string errorMessage = "Não foi possível se conectar: ";
+        
         public void Insert(Autor autor)
         {
             try
             {
                 MySqlCommand comando = new MySqlCommand();
                 comando.CommandType = CommandType.Text;
-                comando.CommandText = "Insert into Autor(nome,nacionalidade) values(@nome, @nacionalidade)";
+                comando.CommandText = "INSERT INTO Autor(nome,nacionalidade) values(@nome, @nacionalidade)";
 
                 comando.Parameters.AddWithValue("@nome", autor.Nome);
                 comando.Parameters.AddWithValue("@nacionalidade", autor.Nacionalidade);
 
                 ConexaoBanco.CRUD(comando);
-            }  catch (Exception ex) { throw new Exception(errorMessage + ex.Message); }
+            }  catch (Exception ex) { throw new Exception(ErrorMessage + ex.Message); }
         }
 
         public static Autor BuscarPorId(int id)
@@ -73,7 +71,7 @@ namespace MVC.DAO
                 comando.Parameters.AddWithValue("@autorId", autor.AutorID);
 
                 ConexaoBanco.CRUD(comando);
-            } catch (Exception ex) { throw new Exception(errorMessage + ex.Message); }
+            } catch (Exception ex) { throw new Exception(ErrorMessage + ex.Message); }
         }
 
         public void Delete(Autor autor)
@@ -87,35 +85,40 @@ namespace MVC.DAO
                 comando.Parameters.AddWithValue("@autorId", autor.AutorID);
 
                 ConexaoBanco.CRUD(comando);
-            } catch (Exception ex) { throw new Exception(errorMessage + ex.Message); }
+            } catch (Exception ex) { throw new Exception(ErrorMessage + ex.Message); }
         }
 
         public IList<Autor> BuscaPorAutor(string nome)
         {
-            MySqlCommand comando = new MySqlCommand();
-            comando.CommandType = CommandType.Text;
-            comando.CommandText = "SELECT * FROM Autor WHERE nome like @nome";
-
-            comando.Parameters.AddWithValue("@nome", "%" + nome + "%");
-            MySqlDataReader dr = ConexaoBanco.Selecionar(comando);
-
-            // lista de "autor"
-            IList<Autor> autores = new List<Autor>();
-
-            if (dr.HasRows)
+            try
             {
-                while (dr.Read())
+                MySqlCommand comando = new MySqlCommand();
+                comando.CommandType = CommandType.Text;
+                comando.CommandText = "SELECT * FROM Autor WHERE nome like @nome";
+
+                comando.Parameters.AddWithValue("@nome", "%" + nome + "%");
+                MySqlDataReader dr = ConexaoBanco.Selecionar(comando);
+
+                // lista de "autor"
+                IList<Autor> autores = new List<Autor>();
+
+                if (dr.HasRows)
                 {
-                    Autor autor = new Autor();
-                    autor.Nome = (string)dr["nome"];
-                    autor.AutorID = (int)dr["AutorID"];
-                    autor.Nacionalidade = (string)dr["nacionalidade"];
+                    while (dr.Read())
+                    {
+                        Autor autor = new Autor();
+                        autor.Nome = (string)dr["nome"];
+                        autor.AutorID = (int)dr["AutorID"];
+                        autor.Nacionalidade = (string)dr["nacionalidade"];
 
-                    autores.Add(autor);
+                        autores.Add(autor);
+                    }
                 }
-            } else { autores = null; }
+                else { autores = null; }
 
-            return autores;
+                return autores;
+            }
+            catch (Exception ex) { throw new Exception(ErrorMessage + ex.Message); }
         }
     }
 }

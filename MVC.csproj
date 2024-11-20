@@ -84,9 +84,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BO\AutorBO.cs" />
+    <Compile Include="BO\BO.cs" />
     <Compile Include="BO\LivroBO.cs" />
     <Compile Include="DAO\AutorDAO.cs" />
     <Compile Include="DAO\ConexaoBanco.cs" />
+    <Compile Include="DAO\DAO.cs" />
     <Compile Include="DAO\LivroDAO.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

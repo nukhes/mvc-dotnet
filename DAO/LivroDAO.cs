@@ -7,105 +7,129 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using MVC.Model;
 using MVC.DAO;
+using MVC.BO;
 
 namespace MVC.DAO
 {
-    class LivroDAO
+    class LivroDAO : DAO
     {
+
         public void Insert(Livro livro)
         {
-            MySqlCommand comando = new MySqlCommand();
-            comando.CommandType = CommandType.Text;
-            comando.CommandText = "INSERT INTO Livro(Titulo, DtPublicacao, AutorID) values(@titulo, @dtPub, @autorID)";
+            try
+            {
+                MySqlCommand comando = new MySqlCommand();
+                comando.CommandType = CommandType.Text;
+                comando.CommandText = "INSERT INTO Livro(Titulo, DtPublicacao, AutorID) values(@titulo, @dtPub, @autorID)";
 
-            comando.Parameters.AddWithValue("@titulo", livro.Titulo);
-            comando.Parameters.AddWithValue("@dtPub", livro.Datapub);
-            comando.Parameters.AddWithValue("autorID", livro.Autor.AutorID);
+                comando.Parameters.AddWithValue("@titulo", livro.Titulo);
+                comando.Parameters.AddWithValue("@dtPub", livro.Datapub);
+                comando.Parameters.AddWithValue("autorID", livro.Autor.AutorID);
 
-            ConexaoBanco.CRUD(comando);
+                ConexaoBanco.CRUD(comando);
+            }
+            catch (Exception ex) { throw new Exception(ErrorMessage + ex.Message); }
         }
 
         public void Update(Livro livro)
         {
-            MySqlCommand comando = new MySqlCommand();
-            comando.CommandType = CommandType.Text;
-            comando.CommandText = "UPDATE Livro SET Titulo=@titulo, DtPublicacao=@dtPub, AutorID=@autorID WHERE LivroID=@livroID";
-            
-            comando.Parameters.AddWithValue("@titulo", livro.Titulo);
-            comando.Parameters.AddWithValue("@dtPub", livro.Datapub);
-            comando.Parameters.AddWithValue("autorID", livro.Autor.AutorID);
-            comando.Parameters.AddWithValue("livroID", livro.LivroId);
+            try
+            {
+                MySqlCommand comando = new MySqlCommand();
+                comando.CommandType = CommandType.Text;
+                comando.CommandText = "UPDATE Livro SET Titulo=@titulo, DtPublicacao=@dtPub, AutorID=@autorID WHERE LivroID=@livroID";
+
+                comando.Parameters.AddWithValue("@titulo", livro.Titulo);
+                comando.Parameters.AddWithValue("@dtPub", livro.Datapub);
+                comando.Parameters.AddWithValue("autorID", livro.Autor.AutorID);
+                comando.Parameters.AddWithValue("livroID", livro.LivroId);
 
 
-            //debug
-            ConexaoBanco.CRUD(comando);
+                //debug
+                ConexaoBanco.CRUD(comando);
+            }
+            catch (Exception ex) { throw new Exception(ErrorMessage + ex.Message); }
             
         }
 
         public void Delete(Livro livro)
         {
-            MySqlCommand comando = new MySqlCommand();
-            comando.CommandType = CommandType.Text;
-            comando.CommandText = "DELETE FROM Livro WHERE LivroID=@livroID";
+            try
+            {
+                MySqlCommand comando = new MySqlCommand();
+                comando.CommandType = CommandType.Text;
+                comando.CommandText = "DELETE FROM Livro WHERE LivroID=@livroID";
 
-            comando.Parameters.AddWithValue("livroID", livro.LivroId);
+                comando.Parameters.AddWithValue("livroID", livro.LivroId);
 
-            ConexaoBanco.CRUD(comando);
+                ConexaoBanco.CRUD(comando);
+            }
+            catch (Exception ex) { throw new Exception(ErrorMessage + ex.Message); }
         }
 
         public Livro BuscarPorId(int id)
         {
-            MySqlCommand comando = new MySqlCommand();
-            comando.CommandType = CommandType.Text;
-            comando.CommandText = "SELECT * FROM Livro WHERE LivroID=@id";
-
-            comando.Parameters.AddWithValue("@id", id);
-
-            MySqlDataReader dr = ConexaoBanco.Selecionar(comando);
-
-            Livro livro = new Livro();
-            AutorDAO autorDAO = new AutorDAO();
-
-            if (dr.HasRows)
+            try
             {
-                dr.Read();
-                livro.Titulo = (string)dr["Titulo"];
-                livro.LivroId = (int)dr["LivroID"];
-                livro.Datapub = (DateTime)dr["DtPublicacao"];
-                livro.Autor = AutorDAO.BuscarPorId((int)dr["AutorID"]);
-            } else
-            {
-                livro = null;
+                MySqlCommand comando = new MySqlCommand();
+                comando.CommandType = CommandType.Text;
+                comando.CommandText = "SELECT * FROM Livro WHERE LivroID=@id";
+
+                comando.Parameters.AddWithValue("@id", id);
+
+                MySqlDataReader dr = ConexaoBanco.Selecionar(comando);
+
+                Livro livro = new Livro();
+                AutorDAO autorDAO = new AutorDAO();
+
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    livro.Titulo = (string)dr["Titulo"];
+                    livro.LivroId = (int)dr["LivroID"];
+                    livro.Datapub = (DateTime)dr["DtPublicacao"];
+                    livro.Autor = AutorDAO.BuscarPorId((int)dr["AutorID"]);
+                }
+                else
+                {
+                    livro = null;
+                }
+                return livro;
             }
-            return livro;
+            catch (Exception ex) { throw new Exception(ErrorMessage + ex.Message); }
         }
         public IList<Livro> BuscaPorLivro(string titulo)
         {
-            MySqlCommand comando = new MySqlCommand();
-            comando.CommandType = CommandType.Text;
-            comando.CommandText = "SELECT * FROM Livro WHERE Titulo like @titulo";
-
-            comando.Parameters.AddWithValue("@titulo", "%" + titulo + "%");
-            MySqlDataReader dr = ConexaoBanco.Selecionar(comando);
-
-            // lista de "autor"
-            IList<Livro> livros = new List<Livro>();
-
-            if (dr.HasRows)
+            try
             {
-                while (dr.Read())
+                MySqlCommand comando = new MySqlCommand();
+                comando.CommandType = CommandType.Text;
+                comando.CommandText = "SELECT * FROM Livro WHERE Titulo like @titulo";
+
+                comando.Parameters.AddWithValue("@titulo", "%" + titulo + "%");
+                MySqlDataReader dr = ConexaoBanco.Selecionar(comando);
+
+                // lista de "autor"
+                IList<Livro> livros = new List<Livro>();
+
+                if (dr.HasRows)
                 {
-                    // Titulo, DtPublicacao, AutorID
-                    Livro livro = new Livro();
-                    livro.Titulo = (string)dr["Titulo"];
-                    livro.Autor.AutorID = (int)dr["AutorID"];
+                    while (dr.Read())
+                    {
+                        // Titulo, DtPublicacao, AutorID
+                        Livro livro = new Livro();
+                        livro.Titulo = (string)dr["Titulo"];
+                        livro.LivroId = (int)dr["LivroID"];
+                        livro.Autor.AutorID = (int)dr["AutorID"];
 
-                    livros.Add(livro);
+                        livros.Add(livro);
+                    }
                 }
-            }
-            else { livros = null; }
+                else { livros = null; }
 
-            return livros;
+                return livros;
+            }
+            catch (Exception ex) { throw new Exception(ErrorMessage + ex.Message); }
         }
     }
 }

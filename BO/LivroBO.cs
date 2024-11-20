@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MVC.BO
 {
-    class LivroBO
+    class LivroBO : BO
     {
         public void Gravar(Livro livro)
         {
@@ -16,39 +16,40 @@ namespace MVC.BO
 
             if (livro.Autor != null)
             {
-                if (livro.LivroId != 0)
-                {
-                    livroDAO.Update(livro);
-                } else
+                try
                 {
                     livroDAO.Insert(livro);
                 }
+                catch (Exception ex) { throw new Exception(ErrorMessage + ex.Message); }
             }
         }
 
         public void Editar(Livro livro)
         {
-            LivroDAO livroDAO = new LivroDAO();
-
+            try
+            {
+                LivroDAO livroDAO = new LivroDAO();
                 livroDAO.Update(livro);
+            }
+            catch (Exception ex) { throw new Exception(ErrorMessage + ex.Message); }
         }
 
         public void Deletar(Livro livro)
         {
-            LivroDAO livroDAO = new LivroDAO();
-
-            if (livro.LivroId > 0)
+            try
             {
+                LivroDAO livroDAO = new LivroDAO();
                 livroDAO.Delete(livro);
             }
+            catch (Exception ex) { throw new Exception(ErrorMessage + ex.Message); }
         }
 
         public void Buscar(Livro livro)
         {
-            LivroDAO livroDAO = new LivroDAO();
-
-            if (livro.LivroId > 0)
+            try
             {
+                LivroDAO livroDAO = new LivroDAO();
+
                 // usar o var elimina a necessidade de criar uma classe pra esse resultado
                 var resultadoBusca = livroDAO.BuscarPorId(livro.LivroId);
 
@@ -56,18 +57,23 @@ namespace MVC.BO
                 livro.Autor = resultadoBusca.Autor;
                 livro.Datapub = resultadoBusca.Datapub;
             }
+            catch (Exception ex) { throw new Exception(ErrorMessage + ex.Message); }
         }
 
         public IList<Livro> BuscarPorTitulo(Livro livro)
         {
             LivroDAO livroDAO = new LivroDAO();
 
-            if (livro.Titulo != "")
+            try
             {
-                IList<Livro> livroTemp = livroDAO.BuscaPorLivro(livro.Titulo);
-                return livroTemp;
-            } else { return null; }
-            
+                if (livro.Titulo != "")
+                {
+                    IList<Livro> livroTemp = livroDAO.BuscaPorLivro(livro.Titulo);
+                    return livroTemp;
+                }
+                else { return null; }
+            }
+            catch (Exception ex) { throw new Exception(ErrorMessage + ex.Message); }
         }
     }
 }

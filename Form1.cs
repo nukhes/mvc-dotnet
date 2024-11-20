@@ -40,7 +40,7 @@ namespace MVC
             btnGravarAutor.Enabled = true;
             btnExcluirAutor.Enabled = true;
             btnEditarAutor.Enabled = true;
-            txtAutorId.Enabled = false;
+            txtAutorId.Enabled = true;
 
             btnBuscaAutor.Visible = false;
             btnBuscaAutorPorNome.Visible = false;
@@ -56,7 +56,7 @@ namespace MVC
             btnGravarLivro.Enabled = true;
             btnExcluirLivro.Enabled = true;
             btnEditarLivro.Enabled = true;
-            txtLivroId.Enabled = false;
+            txtLivroId.Enabled = true;
 
             btnBuscaLivro.Visible = false;
             btnBuscaLivroPorNome.Visible = false;
@@ -134,7 +134,7 @@ namespace MVC
         {
             boxAutor.Enabled = isEnabled;
             txtAutorId.Clear();
-            txtAutorId.Enabled = false;
+            txtAutorId.Enabled = true;
             txtNome.Clear();
             txtNacionalidade.Clear();
         }
@@ -143,7 +143,7 @@ namespace MVC
         {
             boxLivro.Enabled = isEnabled;
             txtLivroId.Clear();
-            txtLivroId.Enabled = false;
+            txtLivroId.Enabled = true;
             txtTitulo.Clear();
             txtDataPub.Clear();
             txtAutorLivroId.Clear();
@@ -280,7 +280,6 @@ namespace MVC
                 {
                     txtTitulo.Text = livro.Titulo;
                     txtDataPub.Text = Convert.ToString(livro.Datapub);
-                    txtAutorId.Text = Convert.ToString(livro.Autor.AutorID);
                 }
             }
             catch { Mensagem.WarningMessage("Preencha os campos corretamente."); }
