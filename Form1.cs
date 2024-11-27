@@ -207,20 +207,19 @@ namespace MVC
         {
             if (txtLivroId.Enabled)
             {
-                try
-                {
-                    Autor autor = new Autor();
-                    AutorBO autorBO = new AutorBO();
-                    autor.AutorID = Convert.ToInt16(txtAutorId.Text);
-                    autor.Nome = txtNome.Text;
-                    autor.Nacionalidade = txtNacionalidade.Text;
 
-                    autorBO.Editar(autor);
-                    Mensagem.SuccessMessage("Autor Editado com sucesso!");
+                    Livro livro = new Livro();
 
+                    livro.LivroId = Convert.ToInt16(txtAutorId.Text);
+                    livro.Titulo = txtTitulo.Text;
+                    livro.Datapub = DateTime.Parse(txtDataPub.Text);
+
+                    LivroBO livroBO = new LivroBO();
+                    livroBO.Editar(livro);
+
+                    Mensagem.SuccessMessage("Livro Editado com sucesso!");
                     ResetBoxAutor(false);
-                }
-                catch { Mensagem.ErrorMessage("Autor não encontrado."); }
+
             } else
             {
                 txtLivroId.Enabled = true;

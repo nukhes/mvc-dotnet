@@ -23,7 +23,7 @@ namespace MVC.BO
             }
             catch (Exception ex) { throw new Exception(ErrorMessage + ex.Message); }
         }
-    
+
 
         public void Editar(Autor autor)
         {
@@ -31,7 +31,7 @@ namespace MVC.BO
             {
                 AutorDAO autorDAO = new AutorDAO();
 
-                if ((autor.Nome != "") && (autor.Nacionalidade != ""))
+                if (autor.Nome != "")
                 {
                     autorDAO.Update(autor);
                 }

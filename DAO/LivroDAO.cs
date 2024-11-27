@@ -37,11 +37,10 @@ namespace MVC.DAO
             {
                 MySqlCommand comando = new MySqlCommand();
                 comando.CommandType = CommandType.Text;
-                comando.CommandText = "UPDATE Livro SET Titulo=@titulo, DtPublicacao=@dtPub, AutorID=@autorID WHERE LivroID=@livroID";
+                comando.CommandText = "UPDATE Livro SET Titulo=@titulo, DtPublicacao=@dtPub WHERE LivroID=@livroID";
 
                 comando.Parameters.AddWithValue("@titulo", livro.Titulo);
                 comando.Parameters.AddWithValue("@dtPub", livro.Datapub);
-                comando.Parameters.AddWithValue("autorID", livro.Autor.AutorID);
                 comando.Parameters.AddWithValue("livroID", livro.LivroId);
 
 

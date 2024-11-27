@@ -64,7 +64,7 @@ namespace MVC.DAO
             {
                 MySqlCommand comando = new MySqlCommand();
                 comando.CommandType = CommandType.Text;
-                comando.CommandText = "UPDATE Autor SET Nome=@nome, Nacionalidade=@nacionalidade WHERE AutorID=@autorId";
+                comando.CommandText = "UPDATE Autor SET nome=@nome, nacionalidade=@nacionalidade WHERE AutorID=@autorId";
 
                 comando.Parameters.AddWithValue("@nome", autor.Nome);
                 comando.Parameters.AddWithValue("@nacionalidade", autor.Nacionalidade);
